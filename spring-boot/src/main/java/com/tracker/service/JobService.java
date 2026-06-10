@@ -8,6 +8,7 @@ import com.tracker.entity.Job;
 import com.tracker.entity.JobEvent;
 import com.tracker.entity.Status;
 import com.tracker.repository.JobRepository;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class JobService {
         this.repo = repo;
     }
 
+    @NonNull
     public JobResponse createJob (CreateJobRequest request) {
         Job job = new Job.Builder()
                 .description(request.description())
