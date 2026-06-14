@@ -8,13 +8,13 @@ package com.tracker.dto;
  * @param company
  * @param location
  * @param contactPerson
- * @param notes
+ * @param title
  */
 public record CreateJobRequest(
         String description,
         String company,
         String location,
         String contactPerson,
-        String notes
+        String title
 ) {
 }

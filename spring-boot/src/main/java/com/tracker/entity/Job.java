@@ -23,15 +23,15 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String company;
-    private String description;
-    private String location;
+    private  String company;
+    private  String description;
+    private  String location;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private  Status status;
 
-    private String contactPerson;
-    private String notes;
+    private  String contactPerson;
+    private  String title;
 
     // One Job can have many Job events
     /*
@@ -42,9 +42,6 @@ public class Job {
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private List<JobEvent> events;
 
-    public void updateNotes(String newNotes) {
-        this.notes = newNotes;
-    }
     public void addEvent(JobEvent event) {
         this.events.add(event);
         event.setJob(this);
@@ -62,7 +59,7 @@ public class Job {
         this.status = builder.status;
         this.company = builder.company;
         this.contactPerson = builder.contactPerson;
-        this.notes = builder.notes;
+        this.title = builder.title;
         this.events = new ArrayList<>();
     }
 
@@ -84,7 +81,7 @@ public class Job {
         private String description;
         private String location;
         private String contactPerson;
-        private String notes;
+        private String title;
         private Status status;
 
         public Builder description(String description) {
@@ -107,8 +104,8 @@ public class Job {
             this.contactPerson = contactPerson;
             return this;
         }
-        public Builder notes(String notes) {
-            this.notes = notes;
+        public Builder title(String title) {
+            this.title = title;
             return this;
         }
 

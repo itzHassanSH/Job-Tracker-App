@@ -12,15 +12,16 @@ import java.util.List;
  * @param location
  * @param status
  * @param contactPerson
- * @param notes
+ * @param title
  * @param events
  */
 public record JobResponse(
     String description,
+    long id,
     String company,
     String location,
     Status status,
     String contactPerson,
-    String notes,
+    String title,
     List<JobEventResponse> events
 ) {}
