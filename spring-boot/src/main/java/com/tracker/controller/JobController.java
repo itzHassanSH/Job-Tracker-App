@@ -2,6 +2,7 @@ package com.tracker.controller;
 
 import com.tracker.dto.CreateJobRequest;
 import com.tracker.dto.JobResponse;
+import com.tracker.dto.UpdateJobRequest;
 import com.tracker.service.JobService;
 
 import org.springframework.http.HttpStatus;
@@ -28,5 +29,15 @@ public class JobController {
     @GetMapping
     public List<JobResponse> getJobs() {
         return jobService.findAllJobs();
+    }
+
+    @DeleteMapping("/jobs/{id}")
+    public void deleteJobs(@PathVariable Long id) {
+        jobService.deleteJob(id);
+    }
+
+    @PatchMapping("/jobs/{id}")
+    public ResponseEntity<JobResponse> updateJob(@PathVariable Long id, @RequestBody UpdateJobRequest request) {
+        return new ResponseEntity<>(jobService.updateJob(id, request), HttpStatus.OK);
     }
 }
