@@ -3,14 +3,17 @@ package com.tracker.service;
 import com.tracker.dto.CreateJobRequest;
 import com.tracker.dto.JobEventResponse;
 import com.tracker.dto.JobResponse;
+import com.tracker.dto.UpdateJobRequest;
 import com.tracker.entity.EventType;
 import com.tracker.entity.Job;
 import com.tracker.entity.JobEvent;
 import com.tracker.entity.Status;
+import com.tracker.exceptions.JobNotFoundException;
 import com.tracker.repository.JobEventRepository;
 import com.tracker.repository.JobRepository;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -80,5 +83,44 @@ public class JobService {
                                 ))
                                 .toList()
                 )).toList();
+    }
+
+    private Job findJob(Long id) {
+        return jobRepository.findById(id).orElseThrow(() -> new JobNotFoundException(id));
+    }
+
+    public void deleteJob(Long id) {
+        // HTTP is the success/failure system
+        //  204: success (no content)
+        //  404: not found
+        //  403: not allowed
+        Job job = findJob(id);
+        jobRepository.delete(job);
+    }
+
+    @NonNull
+    public JobResponse updateJob(Long id, UpdateJobRequest request) {
+        Job job = findJob(id);
+        // Managed entity:
+        // job is a managed entity
+        // JPA tracks changes automatically
+        // At transaction commit → it auto-updates DB
+        job.update(request);
+
+        return new JobResponse(
+                job.getDescription(),
+                job.getId(),
+                job.getCompany(),
+                job.getLocation(),
+                job.getStatus(),
+                job.getContactPerson(),
+                job.getTitle(),
+                job.getEvents().stream()
+                        .map(jobEvent -> new JobEventResponse(
+                                jobEvent.getType(),
+                                jobEvent.getDate()
+                        ))
+                        .toList()
+        );
     }
 }
