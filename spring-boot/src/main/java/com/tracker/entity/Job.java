@@ -3,6 +3,7 @@ package com.tracker.entity;
 // Jakarta Persistence is the standard specification for working with databases in Java
 // Spring Data JPA Dependency required for this package - Spring Boot + JPA (or Hibernate)
 
+import com.tracker.dto.UpdateJobRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,6 +47,33 @@ public class Job {
         this.events.add(event);
         event.setJob(this);
     }
+
+    public void update(UpdateJobRequest req) {
+        if (req.company() != null) {
+            this.company = req.company();
+        }
+        if (req.contactPerson() != null) {
+            this.contactPerson = req.contactPerson();
+        }
+        if (req.description() != null) {
+            this.description = req.description();
+        }
+        if (req.title() != null) {
+            this.title = req.title();
+        }
+        if (req.location() != null) {
+            this.title = req.title();
+        }
+        if (req.status() != null) {
+            this.status = req.status();
+        }
+        if (req.jobEvent() != null) {
+            addEvent(req.jobEvent());
+        }
+    }
+
+    // remember to implement deleteEvent later
+
     public void updateContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
     }
