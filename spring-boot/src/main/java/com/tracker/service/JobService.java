@@ -44,7 +44,7 @@ public class JobService {
                 .build();
         job.addEvent(event);
         jobRepository.save(job);
-        jobEventRepository.save(event);
+
 
 
         ArrayList<JobEventResponse> eventResponses = new ArrayList<>();
