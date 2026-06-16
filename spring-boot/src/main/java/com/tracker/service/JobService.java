@@ -36,7 +36,7 @@ public class JobService {
                 .status(Status.APPLIED)
                 .location(request.location())
                 .contactPerson(request.contactPerson())
-                .title(request.title())
+                .title(StringUtils.capitalize(request.title().trim()))
                 .build();
         JobEvent event = new JobEvent.Builder()
                 .type(EventType.APPLICATION_SENT)
