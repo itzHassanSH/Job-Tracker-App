@@ -1,0 +1,24 @@
+
+.job-header, .job-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    gap: 20px;
+    padding: 12px;
+    align-items: center;
+}
+
+.job-row {
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.job-header {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.edit-button {
+   align-self: center;
+}
