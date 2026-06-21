@@ -31,12 +31,13 @@ public class JobController {
         return jobService.findAllJobs();
     }
 
-    @DeleteMapping("/jobs/{id}")
+    //   "/jobs" is already defined by RequestMapping annotation at the top!
+    @DeleteMapping("/{id}")
     public void deleteJobs(@PathVariable Long id) {
         jobService.deleteJob(id);
     }
 
-    @PatchMapping("/jobs/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<JobResponse> updateJob(@PathVariable Long id, @RequestBody UpdateJobRequest request) {
         return new ResponseEntity<>(jobService.updateJob(id, request), HttpStatus.OK);
     }
